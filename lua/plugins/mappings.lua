@@ -1,4 +1,4 @@
-if true then return {} end -- REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- if true then return {} end -- REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- AstroCore provides a central place to modify mappings set up as well as which-key menu titles
 return {
@@ -8,17 +8,23 @@ return {
     mappings = {
       -- first key is the mode
       n = {
-        -- second key is the lefthand side of the map
+        -- resize windows with ctrl shift arrows
+        ["<C-S-Up>"] = { ":resize +2<CR>", desc = "Resize window up" },
+        ["<C-S-Down>"] = { ":resize -2<CR>", desc = "Resize window down" },
+        ["<C-S-Left>"] = { ":vertical resize +2<CR>", desc = "Resize window left" },
+        ["<C-S-Right>"] = { ":vertical resize -2<CR>", desc = "Resize window right" },
 
-        -- navigate buffer tabs with `H` and `L`
-        -- L = {
-        --   function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
-        --   desc = "Next buffer",
-        -- },
-        -- H = {
-        --   function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
-        --   desc = "Previous buffer",
-        -- },
+        -- With Alt (M) + Shift up or down, copy (wihout register) the line up or down
+        ["<M-S-Up>"] = { ":t .-0<CR>", desc = "Copy line up" },
+        ["<M-S-Down>"] = { ":t .+0<CR>", desc = "Copy line down" },
+
+        -- With Alt (m) + "d"
+        -- Personal Keysmaping
+        ["d"] = { '"_d', desc = "Delete without copy" },
+        [">"] = { ">gv", desc = "Indent" },
+        ["<"] = { "<gv", desc = "Unindent" },
+        ["<M-j>"] = { ":m .+1<CR>==", desc = "Move line down" },
+        ["<M-k>"] = { ":m .-2<CR>==", desc = "Move line up" },
 
         -- mappings seen under group name "Buffer"
         ["<leader>bD"] = {
@@ -33,7 +39,19 @@ return {
         -- this is useful for naming menus
         ["<leader>b"] = { desc = "Buffers" },
         -- quick save
-        -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+        ["<C-s>"] = { ":w!<cr>", desc = "Save File" }, -- change description but the same command
+      },
+      v = {
+        [">"] = { ">gv", desc = "Indent" },
+        ["<"] = { "<gv", desc = "Unindent" },
+        ["d"] = { '"_d', desc = "Delete without copy" },
+        ["<M-j>"] = { ":m .+1<CR>==", desc = "Move line down" },
+        ["<M-k>"] = { ":m .-2<CR>==", desc = "Move line up" },
+      },
+      i = {
+        ["<C-s>"] = { "<esc>:w!<cr>", desc = "Save File" },
+        ["<M-j>"] = { "<ESC>:m .+1<CR>==", desc = "Move line down" },
+        ["<M-k>"] = { "<ESC>:m .-2<CR>==", desc = "Move line up" },
       },
       t = {
         -- setting a mapping to false will disable it

@@ -4,6 +4,22 @@ if true then return {} end -- REMOVE THIS LINE TO ACTIVATE THIS FILE
 return {
   "AstroNvim/astrolsp",
   ---@type AstroLSPOpts
+  setup(
+    "cssls",
+    {
+      settings = {
+        css = { validate = true, lint = {
+          unknownAtRules = "ignore",
+        } },
+        scss = { validate = true, lint = {
+          unknownAtRules = "ignore",
+        } },
+        less = { validate = true, lint = {
+          unknownAtRules = "ignore",
+        } },
+      },
+    }
+  ),
   opts = {
     -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
     diagnostics = {
